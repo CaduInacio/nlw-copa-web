@@ -11,16 +11,16 @@ import { FormEvent, useEffect, useState } from 'react'
 
 // Interfaces de Tipagem
 
-interface HomeProps
+/* interface HomeProps
 {
   poolCount: number;
   guessCount: number;
   userCount: number;
-}
+} */
 
 // Funções
 
-export default function Home(props: HomeProps) 
+export default function Home() 
 {
   const [poolTitle, setPoolTitle] = useState('')
 
@@ -28,6 +28,10 @@ export default function Home(props: HomeProps)
   {
     loadInitialProps()
   }, [])
+
+  let poolCount
+  let guessCount
+  let userCount
 
   async function loadInitialProps()
   {
@@ -43,9 +47,9 @@ export default function Home(props: HomeProps)
       api.get('users/count')
     ])
 
-    props.poolCount = poolCountResponse.data
-    props.guessCount = guessesCountResponse.data
-    props.userCount = usersCountResponse.data
+    poolCount = poolCountResponse.data
+    guessCount = guessesCountResponse.data
+    userCount = usersCountResponse.data
   }
 
   async function handleCreatePool(event: FormEvent)
@@ -87,7 +91,7 @@ export default function Home(props: HomeProps)
           <Image src={usersAvatarExampleImg} alt=""/>
 
           <strong className="text-gray-100 text-xl">
-            <span className="text-ignite-500">+{props.userCount}</span> pessoas já estão usando
+            <span className="text-ignite-500">+{userCount}</span> pessoas já estão usando
           </strong>
         </div>
 
@@ -119,7 +123,7 @@ export default function Home(props: HomeProps)
           <div className="flex items-center gap-6">
             <Image src={iconCheckImg} alt="" />
             <div className="flex flex-col">
-              <span className="font-bold text-2xl">+{props.poolCount}</span>
+              <span className="font-bold text-2xl">+{poolCount}</span>
               <span>Bolões criados</span>
             </div>
           </div>
@@ -129,7 +133,7 @@ export default function Home(props: HomeProps)
           <div className="flex items-center gap-6">
             <Image src={iconCheckImg} alt="" />
             <div className="flex flex-col">
-              <span className="font-bold text-2xl">+{props.guessCount}</span>
+              <span className="font-bold text-2xl">+{guessCount}</span>
               <span>Palpites enviados</span>
             </div>
           </div>
