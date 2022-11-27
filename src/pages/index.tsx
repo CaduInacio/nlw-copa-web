@@ -121,7 +121,7 @@ export default function Home(props: HomeProps)
   )
 }
 
-export const getServerSideProps = async () =>
+/* export const getServerSideProps = async () =>
 {
   const 
   [
@@ -143,4 +143,4 @@ export const getServerSideProps = async () =>
       userCount: usersCountResponse.data.count
     } 
   }
-}
+} */
