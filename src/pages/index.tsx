@@ -43,14 +43,9 @@ export default function Home(props: HomeProps)
       api.get('users/count')
     ])
 
-    return { 
-      props: 
-      {
-        poolCount: poolCountResponse.data.count,
-        guessCount: guessesCountResponse.data.count,
-        userCount: usersCountResponse.data.count
-      } 
-    }
+    props.poolCount = poolCountResponse.data
+    props.guessCount = guessesCountResponse.data
+    props.userCount = usersCountResponse.data
   }
 
   async function handleCreatePool(event: FormEvent)
