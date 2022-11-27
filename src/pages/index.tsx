@@ -7,7 +7,7 @@ import logoImg from '../assets/logo.svg'
 import usersAvatarExampleImg from '../assets/users-avatar-example.png'
 import iconCheckImg from '../assets/icon-check.svg'
 import { api } from '../lib/axios'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 
 // Interfaces de Tipagem
 
@@ -23,6 +23,35 @@ interface HomeProps
 export default function Home(props: HomeProps) 
 {
   const [poolTitle, setPoolTitle] = useState('')
+
+  useEffect(() =>
+  {
+    loadInitialProps()
+  }, [])
+
+  async function loadInitialProps()
+  {
+    const 
+    [
+      poolCountResponse, 
+      guessesCountResponse, 
+      usersCountResponse
+    ] = await Promise.all(
+    [
+      api.get('pools/count'),
+      api.get('guesses/count'),
+      api.get('users/count')
+    ])
+
+    return { 
+      props: 
+      {
+        poolCount: poolCountResponse.data.count,
+        guessCount: guessesCountResponse.data.count,
+        userCount: usersCountResponse.data.count
+      } 
+    }
+  }
 
   async function handleCreatePool(event: FormEvent)
   {
